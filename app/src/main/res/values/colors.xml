@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
+    <color name="colorPrimary">#3E50B4</color>
+    <color name="colorPrimaryDark">#2F3E9E</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="bgBottomNavigation">#d1d1d1</color>
+    <color name="backgroundColor">#F5F5F5</color>
+    <color name="cardColor">#FAFAFA</color>
+    <color name="iconColor">#979797</color>
+    <color name="white">#FFFFFF</color>
+    <color name="green">#009688</color>
+    <color name="black">#000000</color>
+    <color name="yellow">#FFFFEB3B</color>
+    <color name="red">#EB5757</color>
+    <color name="grey">#4D000000</color>
+    <color name="calendarBackground">#EEEEEE</color>
+</resources>
