@@ -24,6 +24,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.firestore.WriteBatch;
 
+import java.util.List;
+
 public class FirebaseHelper {
     //CONSTANTS
 
@@ -43,12 +45,22 @@ public class FirebaseHelper {
     public static final String DOC_KEY_STATUS = "status";
     public static final String DOC_KEY_LONGITUDE = "longitude";
     public static final String ROOT_COL_VENDORS = "vendors";
+    public static final String DOC_KEY_CATEGORIES = "categories";
+
+    public static final String CATEGORY_VEGETABLES = "Vegetables";
+    public static final String CATEGORY_FRUITS = "Fruits";
+    public static final String CATEGORY_DAIRY_PRODUCTS = "DairyProducts";
+    public static final String CATEGORY_GENERAL_STORE = "GeneralStore";
+    public static final String CATEGORIES = "categories";
+
+
     public static final String SEPARATOR = "/";
     public static final int SETUP_OPT_SET_NEW = 1;
     public static final int SETUP_OPT_SET_MERGE = 2;
     public static final int BATCH_WRITE_SET = 1;
     public static final int BATCH_WRITE_UPDATE = 2;
     public static final int BATCH_WRITE_DELETE = 0;
+    public static final int LIMIT = 5;
 
     public static int READ_COUNT = 0;
     private static FirebaseUser currentFirebaseUser = null;
@@ -271,6 +283,24 @@ public class FirebaseHelper {
         });
     }
 
+    public void readCollectionFromFirestoreWithQuery(String url, List<String> categoryItem, final CollectionReadListener readListener) {
+        Query colRef;
+
+        if (categoryItem.size() > 0) {
+            colRef = db.collection(url).whereArrayContainsAny(FirebaseHelper.CATEGORIES, categoryItem).limit(LIMIT);
+        } else {
+            colRef = db.collection(url).limit(LIMIT);
+        }
+
+        colRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                readListener.handleDocuments(task);
+            } else {
+                readListener.onDocumentsReadError(task.getException());
+            }
+        });
+    }
+
     public void readCollectionFromFirestoreAt(@NonNull String url, @NonNull Object startAt, int limit,
                                               @NonNull String orderBy, Query.Direction orderByDirection, final CollectionReadListener readListener) {
         try {
@@ -366,6 +396,40 @@ public class FirebaseHelper {
                     }
                 });
     }
+
+    public void readCollectionFromFirestoreWithNextData(String vendorsURL, List<String> category, Object lastVisible, CollectionReadListener readListener) {
+
+        try {
+            Query query = db.collection(vendorsURL)
+                    .startAfter((int) lastVisible)
+                    .limit(LIMIT);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        readListener.handleDocuments(task);
+                    } else {
+                        readListener.onDocumentsReadError(task.getException());
+                    }
+                }
+            });
+        } catch (ClassCastException exception) {
+            Query query = db.collection(vendorsURL)
+                    .startAfter((DocumentSnapshot) lastVisible)
+                    .limit(LIMIT);
+            query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        readListener.handleDocuments(task);
+                    } else {
+                        readListener.onDocumentsReadError(task.getException());
+                    }
+                }
+            });
+        }
+    }
+
 
     public interface WriteBatchListener {
         void onWriteBatchCompleted(Task<Void> task);

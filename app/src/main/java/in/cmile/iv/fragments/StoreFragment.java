@@ -24,11 +24,11 @@ import in.cmile.iv.activity.BottomNavigation;
  * Created by pintu on 2020-04-01
  */
 public class StoreFragment extends Fragment {
-    LinearLayout llVegetables, llFruits, llDairyProducts, llGeneralStore, llSubmit, llUpdateCancel, llMobile, llStore, llToggleOpenClose;
+    LinearLayout llVegetables, llFruits, llDairyProducts, llGeneralStore, llSubmit, llUpdateCancel, llVehicle, llStore, llToggleOpenClose;
     TextInputEditText edShopName, edMobileNo, edAddress, edCity, edState, edPincode, edArea;
     EditText edMorningTime, edEveningTime;
     ImageView ivLocation, ivVegitables, ivFruits, ivDairy, ivGeneralStore, ivVegitablesBorder, ivFruitsBorder, ivDairyBorder,
-            ivGeneralStoreBorder, ivMobileBorder, ivMobile, ivStoreBorder, ivStore;
+            ivGeneralStoreBorder, ivVehicleBorder, ivVehicle, ivStoreBorder, ivStore;
     View rootView;
     Button btnSubmit, btnCancel, btnUpdate;
     ToggleButton toggleOpenClose;
@@ -36,9 +36,11 @@ public class StoreFragment extends Fragment {
     private int flagFruits = 0;
     private int flagDairy = 0;
     private int flagGeneral = 0;
-    private int flagMobile = 0;
+    private int flagVehicle = 0;
     private int flagStore = 0;
     boolean isShopOpen = false;
+    boolean isStoreSelected = false;
+    boolean isVehicleSelected = false;
 
     @Nullable
     @Override
@@ -49,8 +51,6 @@ public class StoreFragment extends Fragment {
         ((BottomNavigation) getActivity()).setBNVVisibility(View.VISIBLE);
 
         init();
-
-
         return rootView;
     }
 
@@ -61,7 +61,7 @@ public class StoreFragment extends Fragment {
         llGeneralStore = rootView.findViewById(R.id.ll_general_store);
         llSubmit = rootView.findViewById(R.id.ll_submit);
         llUpdateCancel = rootView.findViewById(R.id.ll_update_cancel);
-        llMobile = rootView.findViewById(R.id.ll_mobile);
+        llVehicle = rootView.findViewById(R.id.ll_vehicle);
         llStore = rootView.findViewById(R.id.ll_store);
         llToggleOpenClose = rootView.findViewById(R.id.ll_toggle_open_close);
 
@@ -85,8 +85,8 @@ public class StoreFragment extends Fragment {
         ivDairyBorder = rootView.findViewById(R.id.iv_dairy_products_border);
         ivGeneralStoreBorder = rootView.findViewById(R.id.iv_general_store_border);
         ivStoreBorder = rootView.findViewById(R.id.iv_store_border);
-        ivMobileBorder = rootView.findViewById(R.id.iv_mobile_border);
-        ivMobile = rootView.findViewById(R.id.iv_mobile);
+        ivVehicleBorder = rootView.findViewById(R.id.iv_vehicle_border);
+        ivVehicle = rootView.findViewById(R.id.iv_vehicle);
         ivStore = rootView.findViewById(R.id.iv_store);
 
         btnSubmit = rootView.findViewById(R.id.btn_submit);
@@ -150,17 +150,30 @@ public class StoreFragment extends Fragment {
             }
         });
 
-        llMobile.setOnClickListener(view -> {
-            if (flagMobile == 0) {
-                ivMobileBorder.setVisibility(View.VISIBLE);
-                ivMobile.setVisibility(View.GONE);
-                ivMobileBorder.setImageResource(R.drawable.ic_veggies);
-                flagMobile = 1;
-            } else if (flagMobile == 1) {
-                ivMobile.setVisibility(View.VISIBLE);
-                ivMobileBorder.setVisibility(View.GONE);
-                ivMobile.setImageResource(R.drawable.ic_veggies_border);
-                flagMobile = 0;
+        llVehicle.setOnClickListener(view -> {
+            if (flagVehicle == 0) {
+                ivVehicleBorder.setVisibility(View.VISIBLE);
+                ivVehicle.setVisibility(View.GONE);
+                ivVehicleBorder.setImageResource(R.drawable.ic_vehicle);
+                isVehicleSelected = false;
+                flagVehicle = 1;
+
+                ivStore.setVisibility(View.VISIBLE);
+                ivStoreBorder.setVisibility(View.GONE);
+                ivStore.setImageResource(R.drawable.ic_shop_border);
+                flagStore = 0;
+
+            } else if (flagVehicle == 1) {
+                ivVehicle.setVisibility(View.VISIBLE);
+                ivVehicleBorder.setVisibility(View.GONE);
+                ivVehicle.setImageResource(R.drawable.ic_vehicle);
+                flagVehicle = 0;
+
+                ivStoreBorder.setVisibility(View.VISIBLE);
+                ivStore.setVisibility(View.GONE);
+                ivStoreBorder.setImageResource(R.drawable.ic_store);
+                isStoreSelected = false;
+                flagStore = 1;
             }
         });
 
@@ -168,13 +181,26 @@ public class StoreFragment extends Fragment {
             if (flagStore == 0) {
                 ivStoreBorder.setVisibility(View.VISIBLE);
                 ivStore.setVisibility(View.GONE);
-                ivStoreBorder.setImageResource(R.drawable.ic_general_store);
+                ivStoreBorder.setImageResource(R.drawable.ic_store);
+                isStoreSelected = false;
                 flagStore = 1;
+
+                ivVehicle.setVisibility(View.VISIBLE);
+                ivVehicleBorder.setVisibility(View.GONE);
+                ivVehicle.setImageResource(R.drawable.ic_vehicle_border);
+                flagVehicle = 0;
+
             } else if (flagStore == 1) {
                 ivStore.setVisibility(View.VISIBLE);
                 ivStoreBorder.setVisibility(View.GONE);
-                ivStore.setImageResource(R.drawable.ic_general_store_border);
+                ivStore.setImageResource(R.drawable.ic_shop_border);
                 flagStore = 0;
+
+                ivVehicleBorder.setVisibility(View.VISIBLE);
+                ivVehicle.setVisibility(View.GONE);
+                ivVehicleBorder.setImageResource(R.drawable.ic_vehicle);
+                isVehicleSelected = false;
+                flagVehicle = 1;
             }
         });
 

@@ -1,7 +1,10 @@
 package in.cmile.iv.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -154,5 +157,22 @@ public class BottomNavigation extends AppCompatActivity {
 
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.navigation_logout) {
+            startActivity(new Intent(this, RegisterMobileActivity.class));
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

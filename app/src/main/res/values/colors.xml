@@ -17,4 +17,6 @@
     <color name="red">#EB5757</color>
     <color name="grey">#4D000000</color>
     <color name="calendarBackground">#EEEEEE</color>
+    <color name="orange">#FF0202</color>
+    <color name="blue">#3B56F8</color>
 </resources>

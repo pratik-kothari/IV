@@ -2,7 +2,7 @@
     <string name="app_name">IV</string>
     <string name="enter_valid_number">Please enter valid mobile number</string>
     <string name="enter_valid_code">Please enter valid code</string>
-    <string name="mobile_no">Mobile No.</string>
+    <string name="mobile_no">Mobile No</string>
     <string name="mobile">Mobile</string>
     <string name="terms_and_conditions"><![CDATA[By registering, you accept our Terms & Conditions]]></string>
     <string name="submit">Submit</string>
@@ -15,9 +15,6 @@
     <string name="open_close">Open/Close</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="state">State</string>
-    <string name="city">City</string>
-    <string name="pincode">Pincode</string>
     <string name="address">Address</string>
     <string name="vendor_name">Vendor Name</string>
     <string name="favourite">Favourite</string>
@@ -34,8 +31,8 @@
     <string name="no">No</string>
     <string name="vegitables">Vegetables</string>
     <string name="fruits">Fruits</string>
-    <string name="dairy_products">Dairy \n Products</string>
-    <string name="general_store">General \nStore</string>
+    <string name="dairy_products">Dairy Products</string>
+    <string name="general_store">General Store</string>
     <string name="area">Area</string>
     <string name="type">Type</string>
     <string name="proucts">Products</string>
@@ -46,4 +43,13 @@
     <string name="getting_data">Getting data</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel </string>
+    <string name="vehicle">Vehicle</string>
+    <string name="dairyproducts">DairyProducts</string>
+    <string name="generalstore">GeneralStore</string>
+    <string name="title_logout">Logout</string>
+    <string name="shop_status">Shop Status : </string>
+    <string name="city_state">City - State</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="pincode">Pincode</string>
 </resources>

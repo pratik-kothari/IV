@@ -21,6 +21,7 @@ import java.util.List;
 
 import in.cmile.iv.R;
 import in.cmile.iv.activity.VendorDetailsActivity;
+import in.cmile.iv.helper.FirebaseHelper;
 import in.cmile.iv.models.VendorInfo;
 
 /**
@@ -29,11 +30,19 @@ import in.cmile.iv.models.VendorInfo;
 public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.ViewHolder> {
     private Context context;
     private List<VendorInfo> vendorInfoList;
-    private int flag = 0;
+    private int flagFavourite = 0;
+    private int flagVeg = 0;
+    private int flagFruits = 0;
+    private int flagDairy = 0;
+    private int flagGeneralStore = 0;
 
-    public VendorsListAdapter(Context context, List<VendorInfo> vendorInfoList) {
+    public VendorsListAdapter(Context context, List<VendorInfo> vendorInfoList, int flagVeg, int flagFruits, int flagDairy, int flagGeneralStore) {
         this.context = context;
         this.vendorInfoList = vendorInfoList;
+        this.flagVeg = flagVeg;
+        this.flagFruits = flagFruits;
+        this.flagDairy = flagDairy;
+        this.flagGeneralStore = flagGeneralStore;
     }
 
     @NonNull
@@ -55,6 +64,36 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
         } else {
             holder.tvIsOpenClose.setText(R.string.close);
         }
+        System.out.println("vendor info" + vendorInfo.getCategoryItem().toString());
+
+        if (vendorInfo.getCategoryItem().contains(FirebaseHelper.CATEGORY_FRUITS)) {
+            System.out.println("Inside fruits");
+            holder.viewFruits.setVisibility(View.VISIBLE);
+        } else {
+            holder.viewFruits.setVisibility(View.GONE);
+        }
+
+        if (vendorInfo.getCategoryItem().contains(FirebaseHelper.CATEGORY_DAIRY_PRODUCTS)) {
+            System.out.println("Inside dairy");
+            holder.viewDairyProducts.setVisibility(View.VISIBLE);
+        } else {
+            holder.viewDairyProducts.setVisibility(View.GONE);
+        }
+
+        if (vendorInfo.getCategoryItem().contains(FirebaseHelper.CATEGORY_GENERAL_STORE)) {
+            System.out.println("Inside general store");
+            holder.viewGeneralStore.setVisibility(View.VISIBLE);
+        } else {
+            holder.viewGeneralStore.setVisibility(View.GONE);
+        }
+
+        if (vendorInfo.getCategoryItem().contains(FirebaseHelper.CATEGORY_VEGETABLES)) {
+            System.out.println("Inside vegetables");
+            holder.viewVegitables.setVisibility(View.VISIBLE);
+        } else {
+            holder.viewVegitables.setVisibility(View.GONE);
+        }
+
 
         Glide.with(context)
                 .load(R.drawable.ic_launcher_background)
@@ -62,18 +101,18 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
                 .into(holder.ivShopLogo);
 
         holder.llFavourite.setOnClickListener(view -> {
-            if (flag == 0) {
+            if (flagFavourite == 0) {
                 holder.ivFavouriteBorder.setVisibility(View.VISIBLE);
                 holder.ivFavouriteFill.setVisibility(View.GONE);
                 holder.ivFavouriteBorder.setImageResource(R.drawable.ic_favorite);
                 Toast.makeText(context, "Added to favourite", Toast.LENGTH_SHORT).show();
-                flag = 1;
-            } else if (flag == 1) {
+                flagFavourite = 1;
+            } else if (flagFavourite == 1) {
                 holder.ivFavouriteFill.setVisibility(View.VISIBLE);
                 holder.ivFavouriteBorder.setVisibility(View.GONE);
                 holder.ivFavouriteFill.setImageResource(R.drawable.ic_favorite_border);
                 Toast.makeText(context, "Removed from favourite", Toast.LENGTH_SHORT).show();
-                flag = 0;
+                flagFavourite = 0;
             }
         });
 
@@ -88,7 +127,6 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -100,7 +138,7 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
         TextView tvShopName, tvShopAddress, tvIsOpenClose;
         LinearLayout llVendorItem, llFavourite;
         ImageView ivFavouriteBorder, ivFavouriteFill, ivShopLogo;
-
+        View viewVegitables, viewFruits, viewDairyProducts, viewGeneralStore;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +151,11 @@ public class VendorsListAdapter extends RecyclerView.Adapter<VendorsListAdapter.
             ivFavouriteBorder = itemView.findViewById(R.id.iv_fav_border);
             ivFavouriteFill = itemView.findViewById(R.id.iv_fav_fill);
             ivShopLogo = itemView.findViewById(R.id.iv_shop_logo);
+            viewVegitables = itemView.findViewById(R.id.view_veg);
+            viewFruits = itemView.findViewById(R.id.view_fruits);
+            viewDairyProducts = itemView.findViewById(R.id.view_dairy);
+            viewGeneralStore = itemView.findViewById(R.id.view_general_store);
+
         }
     }
 }

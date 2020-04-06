@@ -1,13 +1,16 @@
 package in.cmile.iv.models;
 
+import android.content.Context;
 import android.widget.ImageView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by pintu on 2020-03-27
  */
 public class VendorInfo implements Serializable {
+    private Context context;
     private ImageView ivLogo;
     private String name;
     private boolean isShopOpen = false;
@@ -19,24 +22,19 @@ public class VendorInfo implements Serializable {
     private String pincode;
     private String mobileNo;
     private String type;
-    private String mobility;
     private String vendorId;
     private String status;
     private String openTime;
     private String closeTime;
     private String lattitude;
     private String longitude;
+    private ArrayList<String> categoryItem;
+    private ArrayList<VendorInfo> categoryArray;
 
     public VendorInfo() {
     }
 
-    public VendorInfo(String name, String address, boolean isShopOpen) {
-        this.name = name;
-        this.address = address;
-        this.isShopOpen = isShopOpen;
-    }
-
-    public VendorInfo(String name, String address, String area, String city, String state, String pincode, String mobileNo, String type, String mobility, String vendorId, String status, String openTime, String closeTime, String lattitude, String longitude) {
+    public VendorInfo(String name, String address, String area, String city, String state, String pincode, String mobileNo, String type, String vendorId, String status, String openTime, String closeTime, String lattitude, String longitude, ArrayList<String> categoryItems) {
         this.name = name;
         this.address = address;
         this.area = area;
@@ -45,13 +43,13 @@ public class VendorInfo implements Serializable {
         this.pincode = pincode;
         this.mobileNo = mobileNo;
         this.type = type;
-        this.mobility = mobility;
         this.vendorId = vendorId;
         this.status = status;
         this.openTime = openTime;
         this.closeTime = closeTime;
         this.lattitude = lattitude;
         this.longitude = longitude;
+        this.categoryItem = categoryItems;
     }
 
     public String getAddress() {
@@ -108,14 +106,6 @@ public class VendorInfo implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getMobility() {
-        return mobility;
-    }
-
-    public void setMobility(String mobility) {
-        this.mobility = mobility;
     }
 
     public String getVendorId() {
@@ -196,5 +186,13 @@ public class VendorInfo implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<String> getCategoryItem() {
+        return categoryItem;
+    }
+
+    public void setCategoryItem(ArrayList<String> categoryItem) {
+        this.categoryItem = categoryItem;
     }
 }

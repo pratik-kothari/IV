@@ -190,14 +190,14 @@
                             android:layout_width="@dimen/dp_48"
                             android:layout_height="@dimen/dp_48"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_general_store_border" />
+                            app:srcCompat="@drawable/ic_shop_border" />
 
                         <ImageView
                             android:id="@+id/iv_store"
                             android:layout_width="@dimen/dp_48"
                             android:layout_height="@dimen/dp_48"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_general_store"
+                            android:src="@drawable/ic_shop"
                             android:visibility="gone" />
 
                         <TextView
@@ -210,32 +210,32 @@
 
 
                     <LinearLayout
-                        android:id="@+id/ll_mobile"
+                        android:id="@+id/ll_vehicle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dp_8"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/iv_mobile_border"
+                            android:id="@+id/iv_vehicle_border"
                             android:layout_width="@dimen/dp_48"
                             android:layout_height="@dimen/dp_48"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_veggies_border" />
+                            android:src="@drawable/ic_vehicle_border" />
 
                         <ImageView
-                            android:id="@+id/iv_mobile"
+                            android:id="@+id/iv_vehicle"
                             android:layout_width="@dimen/dp_48"
                             android:layout_height="@dimen/dp_48"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_veggies"
+                            android:src="@drawable/ic_vehicle"
                             android:visibility="gone" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="@string/mobile" />
+                            android:text="@string/vehicle" />
 
                     </LinearLayout>
 
